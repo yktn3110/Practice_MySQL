@@ -45,3 +45,112 @@ WHERE
 
 
 /* outer join */
+SELECT
+    u.id,
+    u.last_name,
+    u.first_name,
+    o.id
+from
+    users u
+LEFT OUTER JOIN
+    orders o
+ON u.id = o.user_id
+ORDER BY
+    u.id;
+
+
+/* practice */
+SELECT
+    p.id,
+    p.name,
+    sum(o.product_qty)
+FROM
+    products p
+LEFT OUTER JOIN
+    order_details o
+ON p.id = o.product_id
+GROUP BY
+    p.id
+ORDER BY
+    p.id;
+
+SELECT
+    o.id,
+    u.last_name,
+    u.first_name,
+    o.amount,
+    o.order_time,
+    od.product_qty,
+    p.name
+FROM
+    orders o
+LEFT OUTER JOIN
+    order_details od
+ON o.id = od.order_id
+LEFT OUTER JOIN
+    products p
+ON od.product_id = p.id
+LEFT OUTER JOIN
+    users u
+ON o.user_id = u.id
+ORDER BY
+    o.id;
+
+SELECT
+    p.id,
+    p.name,
+    c.name
+FROM
+    products p
+LEFT OUTER JOIN
+    products_categories pc
+ON p.id = pc.product_id
+LEFT OUTER JOIN
+    categories c
+ON pc.category_id = c.id
+ORDER BY
+    p.id;
+
+
+/* union */
+SELECT
+    email,
+    last_name,
+    first_name,
+    gender
+FROM
+    users
+UNION --- 重複行は1行にまとめる (allをつけると重複行もすべて表示)
+SELECT
+    email,
+    last_name,
+    first_name,
+    gender
+FROM
+    admin_users;
+
+
+/* union with condition */
+SELECT
+    email,
+    last_name,
+    first_name,
+    gender
+FROM
+    users
+WHERE
+    gender = 1
+UNION 
+SELECT
+    email,
+    last_name,
+    first_name,
+    gender
+FROM
+    admin_users
+WHERE gender = 2
+ORDER BY
+    last_name,
+    first_name;
+
+
