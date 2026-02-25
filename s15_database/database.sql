@@ -29,3 +29,13 @@ show columns from books;
 /* delete column */
 alter table books drop column unit_price;
 show columns from books;
+
+/* delete table */
+show tables;
+drop table books;
+show tables;
+
+/* delete database */
+show DATABASES;
+drop database book_store;
+show DATABASES;
